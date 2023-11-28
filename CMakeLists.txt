@@ -19,3 +19,5 @@ if(MSVC)
   target_link_libraries(fmtlog-static fmt)
 endif()
 install(TARGETS fmtlog-static)
+
+target_include_directories(fmtlog-static PUBLIC .)
