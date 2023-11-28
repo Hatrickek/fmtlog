@@ -26,6 +26,7 @@ SOFTWARE.
 #include <thread>
 #include <limits>
 #include <ios>
+#include <chrono>
 
 #ifdef _WIN32
 #ifndef NOMINMAX
@@ -491,6 +492,11 @@ struct fmtlogDetailWrapper
 
 template<int _>
 fmtlogDetailT<> fmtlogDetailWrapper<_>::impl;
+
+template <int __> int64_t fmtlogT<__>::TSCNS::rdsysns() {
+  using namespace std::chrono;
+  return duration_cast<nanoseconds>(system_clock::now().time_since_epoch()).count();
+}
 
 template<int _>
 void fmtlogT<_>::registerLogInfo(uint32_t& logId, FormatToFn fn, const char* location,
