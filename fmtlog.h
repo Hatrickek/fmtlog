@@ -26,7 +26,6 @@ SOFTWARE.
 #include "fmt/format.h"
 #include <type_traits>
 #include <vector>
-#include <chrono>
 #include <atomic>
 #include <thread>
 #include <memory>
@@ -299,10 +298,7 @@ public:
 
     inline int64_t rdns() const { return tsc2ns(rdtsc()); }
 
-    static inline int64_t rdsysns() {
-      using namespace std::chrono;
-      return duration_cast<nanoseconds>(system_clock::now().time_since_epoch()).count();
-    }
+    static int64_t rdsysns();
 
     double getTscGhz() const { return 1.0 / ns_per_tsc_; }
 
