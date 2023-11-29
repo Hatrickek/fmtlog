@@ -12,12 +12,16 @@ else()
     link_libraries(pthread)
 endif()
 
+if(NOT TARGET fmt::fmt)
+	find_package(fmt CONFIG REQUIRED)
+endif()
+
 link_directories(.)
 
 add_library(fmtlog-static fmtlog.cc)
-if(MSVC)
-  target_link_libraries(fmtlog-static fmt)
-endif()
+target_link_libraries(fmtlog-static fmt)
 install(TARGETS fmtlog-static)
 
 target_include_directories(fmtlog-static PUBLIC .)
+
+
