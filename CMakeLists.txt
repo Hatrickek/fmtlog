@@ -4,7 +4,9 @@ project(fmtlog CXX)
 
 if(MSVC)
     add_compile_options(/std:c++latest)
-else()
+endif()
+
+if(NOT MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -O3 -std=c++17)
     #add_compile_options(-Wall -Ofast -std=c++2a -DNDEBUG -march=skylake -flto -fno-exceptions -fno-rtti -fno-unwind-tables -fno-asynchronous-unwind-tables -DFMTLOG_NO_CHECK_LEVEL=1)
     #SET(CMAKE_AR  "gcc-ar")
